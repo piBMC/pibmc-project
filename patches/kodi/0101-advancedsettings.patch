@@ -1,0 +1,71 @@
+--- a/xbmc/settings/AdvancedSettings.cpp	2017-07-25 17:41:48.000000000 +0200
++++ b/xbmc/settings/AdvancedSettings.cpp	2017-07-27 06:05:54.398956000 +0200
+@@ -258,7 +258,7 @@ void CAdvancedSettings::Initialize()
+   m_playlistAsFolders = true;
+   m_detectAsUdf = false;
+ 
+-  m_fanartRes = 1080;
++  m_fanartRes = 720;
+   m_imageRes = 720;
+   m_imageScalingAlgorithm = CPictureScalingAlgorithm::Default;
+ 
+@@ -275,7 +275,7 @@ void CAdvancedSettings::Initialize()
+ 
+   m_bMusicLibraryAllItemsOnBottom = false;
+   m_bMusicLibraryCleanOnUpdate = false;
+-  m_iMusicLibraryRecentlyAddedItems = 25;
++  m_iMusicLibraryRecentlyAddedItems = 10;
+   m_strMusicLibraryAlbumFormat = "";
+   m_prioritiseAPEv2tags = false;
+   m_musicItemSeparator = " / ";
+@@ -318,7 +318,7 @@ void CAdvancedSettings::Initialize()
+ 
+   m_curlconnecttimeout = 30;
+   m_curllowspeedtime = 20;
+-  m_curlretries = 2;
++  m_curlretries = 20;
+   m_curlDisableIPV6 = false;      //Certain hardware/OS combinations have trouble
+                                   //with ipv6.
+ 
+@@ -327,7 +327,7 @@ void CAdvancedSettings::Initialize()
+ #else
+   m_startFullScreen = false;
+ #endif
+-  m_showExitButton = true;
++  m_showExitButton = false;
+   m_splashImage = true;
+ 
+   m_playlistRetries = 100;
+@@ -356,10 +356,10 @@ void CAdvancedSettings::Initialize()
+   m_iPVRNumericChannelSwitchTimeout = 1000;
+ 
+   m_cacheMemSize = 1024 * 1024 * 20;
+-  m_cacheBufferMode = CACHE_BUFFER_MODE_INTERNET; // Default (buffer all internet streams/filesystems)
++  m_cacheBufferMode = CACHE_BUFFER_MODE_TRUE_INTERNET; // Default (buffer all internet streams/filesystems)
+   // the following setting determines the readRate of a player data
+   // as multiply of the default data read rate
+-  m_cacheReadFactor = 4.0f;
++  m_cacheReadFactor = 8.0f;
+ 
+   m_addonPackageFolderSize = 200;
+ 
+@@ -789,7 +789,7 @@ void CAdvancedSettings::ParseSettingsFil
+   {
+     XMLUtils::GetInt(pElement, "curlclienttimeout", m_curlconnecttimeout, 1, 1000);
+     XMLUtils::GetInt(pElement, "curllowspeedtime", m_curllowspeedtime, 1, 1000);
+-    XMLUtils::GetInt(pElement, "curlretries", m_curlretries, 0, 10);
++    XMLUtils::GetInt(pElement, "curlretries", m_curlretries, 0, 20);
+     XMLUtils::GetBoolean(pElement,"disableipv6", m_curlDisableIPV6);
+   }
+ 
+@@ -1012,8 +1012,8 @@ void CAdvancedSettings::ParseSettingsFil
+ 
+   XMLUtils::GetInt(pRootElement, "remotedelay", m_remoteDelay, 0, 20);
+   XMLUtils::GetFloat(pRootElement, "controllerdeadzone", m_controllerDeadzone, 0.0f, 1.0f);
+-  XMLUtils::GetUInt(pRootElement, "fanartres", m_fanartRes, 0, 1080);
+-  XMLUtils::GetUInt(pRootElement, "imageres", m_imageRes, 0, 1080);
++  XMLUtils::GetUInt(pRootElement, "fanartres", m_fanartRes, 0, 720);
++  XMLUtils::GetUInt(pRootElement, "imageres", m_imageRes, 0, 720);
+   if (XMLUtils::GetString(pRootElement, "imagescalingalgorithm", tmp))
+     m_imageScalingAlgorithm = CPictureScalingAlgorithm::FromString(tmp);
+   XMLUtils::GetBoolean(pRootElement, "playlistasfolders", m_playlistAsFolders);

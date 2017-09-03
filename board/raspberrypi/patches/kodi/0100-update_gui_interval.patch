@@ -1,0 +1,14 @@
+--- a/xbmc/dialogs/GUIDialogBusy.cpp	2017-07-25 17:41:48.000000000 +0200
++++ b/xbmc/dialogs/GUIDialogBusy.cpp	2017-07-27 04:39:05.473904117 +0200
+@@ -69,7 +69,11 @@ bool CGUIDialogBusy::WaitOnEvent(CEvent
+     {
+       dialog->Open();
+ 
++#ifdef TARGET_RASPBERRY_PI
++      while(!event.WaitMSec(100))
++#else
+       while(!event.WaitMSec(1))
++#endif
+       {
+         dialog->ProcessRenderLoop(false);
+         if (allowCancel && dialog->IsCanceled())
